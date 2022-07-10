@@ -13,7 +13,10 @@ require("./sockets/socket");
 // Public path
 const publicPath = path.join(__dirname, "public");
 
+// use publicpath to serve static files
 app.use(express.static(publicPath));
+// Cors middleware
+app.use(cors());
 
 server.listen(process.env.PORT, (error) => {
   if (error) console.error(error);
