@@ -19,12 +19,12 @@
         console.log("Disconnected");
       });
 
-      socket.emit("message", {
-        message: "Hello World",
-      });
-
       socket.on("message", function (data) {
         console.log(data);
+      });
+
+      socket.on("bands", function (data) {
+        console.table(data);
       });
     </script>
   </body>
