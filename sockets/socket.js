@@ -15,14 +15,6 @@ io.on("connection", (client) => {
 
   client.emit("bands", bands.getBands());
 
-  client.on("disconnect", () => {
-    console.log("disconnected");
-  });
-  client.on("message", (message) => {
-    console.log(message);
-    io.emit("message", { admin: "Admin hi" });
-  });
-
   client.on("emitir", (payload) => {
     client.broadcast.emit("message", payload); // Emite a todos menos a él mismo
   });
@@ -30,6 +22,12 @@ io.on("connection", (client) => {
   // Votar
   client.on("vote-band", ({ id }) => {
     bands.voteBand(id);
+    io.emit("bands", bands.getBands());
+  });
+
+  // Add band
+  client.on("add-band", (payload) => {
+    bands.addBand(new Band(payload.name));
     io.emit("bands", bands.getBands());
   });
 });
