@@ -30,4 +30,10 @@ io.on("connection", (client) => {
     bands.addBand(new Band(payload.name));
     io.emit("bands", bands.getBands());
   });
+
+  // Delete band
+  client.on("delete-band", (payload) => {
+    bands.deleteBand(payload.id);
+    io.emit("bands", bands.getBands());
+  });
 });
